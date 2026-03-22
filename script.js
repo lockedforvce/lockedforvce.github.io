@@ -53,4 +53,4 @@ function calculate() {
   document.getElementById("result").innerText =
     "Percentile = " + (result * 100).toFixed(2) + "%";
 }
-}
+
