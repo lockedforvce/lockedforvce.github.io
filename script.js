@@ -21,7 +21,8 @@ function erf(x) {
 function normalCDF(x, mean, std) {
   return 0.5 * (1 + erf((x - mean) / (std * Math.sqrt(2))));
 }
-
+let currentMean = null;
+let currentStd = null;
 const subjects = {
   english: { mean: 32.6, sd: 8 },
   chemistry: { mean: 125.3, sd: 47.2 },
@@ -34,15 +35,22 @@ function updateValues() {
 
   const data = subjects[selected];
 
-  document.getElementById("mean").value = data.mean;
-  document.getElementById("std").value = data.sd;
+  currentMean = data.mean;
+  currentStd = data.sd;
 }
 // Button function
 function calculate() {
   const x = parseFloat(document.getElementById("x").value);
 
-  const result = normalCDF(x, mean, std);
+  if (currentMean === null || currentStd === null) {
+    document.getElementById("result").innerText =
+      "Please select a subject first.";
+    return;
+  }
+
+  const result = normalCDF(x, currentMean, currentStd);
 
   document.getElementById("result").innerText =
-    "P(X ≤ x) = " + result.toFixed(5);
+    "Percentile = " + (result * 100).toFixed(2) + "%";
+}
 }
