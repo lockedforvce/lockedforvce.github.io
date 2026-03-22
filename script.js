@@ -21,11 +21,22 @@ function erf(x) {
 function normalCDF(x, mean, std) {
   return 0.5 * (1 + erf((x - mean) / (std * Math.sqrt(2))));
 }
+
 const subjects = {
   english: { mean: 32.6, sd: 8 },
   chemistry: { mean: 125.3, sd: 47.2 },
   biology: { mean: 146.2, sd: 44 }
 };
+function updateValues() {
+  const selected = document.getElementById("subject").value;
+
+  if (!selected) return;
+
+  const data = subjects[selected];
+
+  document.getElementById("mean").value = data.mean;
+  document.getElementById("std").value = data.sd;
+}
 // Button function
 function calculate() {
   const x = parseFloat(document.getElementById("x").value);
