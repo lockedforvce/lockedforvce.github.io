@@ -52,6 +52,8 @@ function calculate() {
   const result = normalCDF(x, currentMean, currentStd);
 
   document.getElementById("result").innerText =
-    "Percentile = " + (result * 100).toFixed(2) + "%";
+    "Percentile = " + (result * 100).toFixed(2) + "th";
+   document.getElementById("ss").innerText =
+    "Study Score = " + 30+(10*((x-currentMean)/currentStd));
 }
 
