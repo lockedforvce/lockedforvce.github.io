@@ -54,6 +54,6 @@ function calculate() {
   document.getElementById("result").innerText =
     "Percentile = " + (result * 100).toFixed(2) + "th";
    document.getElementById("ss").innerText =
-    "Study Score = " + 30 + ( 10 * (( x - currentMean ) / currentStd ));
+    "Study Score = " + ( 30 + ( 10 * (( 2 * x - currentMean ) / currentStd ))).toFixed(2);
 }
 
