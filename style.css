@@ -11,3 +11,16 @@ h1 {
 p {
   color: #f4f4f4;
 }
+.container {
+  display: flex;
+  flex-direction: column;   /* stacks items vertically */
+  align-items: center;      /* centers horizontally */
+  justify-content: center;  /* optional vertical centering */
+  margin-top: 50px;
+  gap: 15px;                /* spacing between elements */
+}
+
+select, input, button {
+  width: 200px;             /* makes them uniform */
+  text-align: center;
+}
