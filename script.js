@@ -52,12 +52,12 @@ function calculate() {
   }
 
   let result = normalCDF(x, currentMean, currentStd);
+ result = Math.max(0, Math.min(1, result));
+
+  if ((2 * x) >= data.MaxMarks) {
+  result = .9999;
+
   let StudyScore = result * 50
-
-result = Math.max(0, Math.min(1, result));
-
-if ((2 * x) >= data.MaxMarks) {
-  result = 1;
 }
   document.getElementById("result").innerText =
     "Percentile = " + (result * 100).toFixed(2) + "th";
