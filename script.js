@@ -24,7 +24,7 @@ function normalCDF(x, mean, std) {
 let currentMean = null;
 let currentStd = null;
 const subjects = {
-  stoopd: { mean: null, sd: null, MaxMarks: null},
+  stoopid: { mean: null, sd: null, MaxMarks: null},
   english: { mean: 32.6, sd: 8, MaxMarks: 60 },
   chemistry: { mean: 125.3, sd: 47.2, MaxMarks: 240 },
   biology: { mean: 146.2, sd: 44, MaxMarks: 240 }
@@ -42,19 +42,21 @@ function updateValues() {
 // Button function
 function calculate() {
   const x = parseFloat(document.getElementById("x").value);
-
+  const selected = document.getElementById("subject").value;
+  const data = subjects[selected];
+  
   if (currentMean === null || currentStd === null) {
     document.getElementById("result").innerText =
       "are we deadass";
     return;
   }
 
-  const result = normalCDF(x, currentMean, currentStd);
+  let result = normalCDF(x, currentMean, currentStd);
   let StudyScore = result * 50
 
-percentile = Math.max(0, Math.min(1, result));
+result = Math.max(0, Math.min(1, result));
 
-if (x >= MaxMarks) {
+if (x >= data.MaxMarks) {
   result = 1;
 }
   document.getElementById("result").innerText =
