@@ -19,7 +19,7 @@ function erf(x) {
 
 // Normal CDF
 function normalCDF(x, mean, std) {
-  return 0.5 * (1 + erf((x - mean) / (std * Math.sqrt(2))));
+  return 0.5 * (1 + erf((2*x - mean) / (std * Math.sqrt(2))));
 }
 let currentMean = null;
 let currentStd = null;
