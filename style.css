@@ -13,15 +13,17 @@ p {
 }
 .container {
   display: flex;
-  flex-direction: column;   /* stacks items vertically */
-  align-items: center;      /* centers horizontally */
-  justify-content: center;  /* optional vertical centering */
+  flex-direction: column;   
+  align-items: center;      
+  justify-content: center;  
   margin-top: 50px;
-  gap: 15px;                /* spacing between elements */
+  gap: 15px;                
 }
 
 select, input, button {
   height: 60px;
-  width: 400px;             /* makes them uniform */
+  width: 400px;  
+  box-sizing: border-box;
+  padding: 8px;
   text-align: center;
 }
