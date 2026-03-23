@@ -57,8 +57,8 @@ function calculate() {
   if ((2 * x) >= data.MaxMarks) {
   result = .9999;
 
-  let StudyScore = result * 50
 }
+  let StudyScore = result * 50
   document.getElementById("result").innerText =
     "Percentile = " + (result * 100).toFixed(2) + "th";
    document.getElementById("ss").innerText =
