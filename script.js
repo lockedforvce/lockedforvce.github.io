@@ -24,6 +24,7 @@ function normalCDF(x, mean, std) {
 let currentMean = null;
 let currentStd = null;
 const subjects = {
+  stoopd: { mean: null, sd: null},
   english: { mean: 32.6, sd: 8 },
   chemistry: { mean: 125.3, sd: 47.2 },
   biology: { mean: 146.2, sd: 44 }
@@ -44,7 +45,7 @@ function calculate() {
 
   if (currentMean === null || currentStd === null) {
     document.getElementById("result").innerText =
-      "Please select a subject first.";
+      "are we deadass";
     return;
   }
 
