@@ -21,6 +21,7 @@ p {
 }
 
 select, input, button {
-  width: 200px;             /* makes them uniform */
+  height: 320px;
+  width: 400px;             /* makes them uniform */
   text-align: center;
 }
