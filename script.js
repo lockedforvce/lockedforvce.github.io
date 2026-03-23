@@ -24,10 +24,10 @@ function normalCDF(x, mean, std) {
 let currentMean = null;
 let currentStd = null;
 const subjects = {
-  stoopd: { mean: null, sd: null},
-  english: { mean: 32.6, sd: 8 },
-  chemistry: { mean: 125.3, sd: 47.2 },
-  biology: { mean: 146.2, sd: 44 }
+  stoopd: { mean: null, sd: null, MaxMarks: null},
+  english: { mean: 32.6, sd: 8, MaxMarks: 60 },
+  chemistry: { mean: 125.3, sd: 47.2, MaxMarks: 240 },
+  biology: { mean: 146.2, sd: 44, MaxMarks: 240 }
 };
 function updateValues() {
   const selected = document.getElementById("subject").value;
@@ -50,10 +50,16 @@ function calculate() {
   }
 
   const result = normalCDF(x, currentMean, currentStd);
+  let StudyScore = result * 50
 
+percentile = Math.max(0, Math.min(1, result));
+
+if (x >= MaxMarks) {
+  result = 1;
+}
   document.getElementById("result").innerText =
     "Percentile = " + (result * 100).toFixed(2) + "th";
    document.getElementById("ss").innerText =
-    "Study Score = " + (1.067 * ( 30 + ( 7.3 * (( 2 * x - currentMean ) / currentStd )))).toFixed(2);
+    "Study Score = " + StudyScore.toFixed(2);
 }
 
