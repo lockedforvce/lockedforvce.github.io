@@ -56,7 +56,7 @@ function calculate() {
 
 result = Math.max(0, Math.min(1, result));
 
-if (x >= data.MaxMarks) {
+if ((2 * x) >= data.MaxMarks) {
   result = 1;
 }
   document.getElementById("result").innerText =
