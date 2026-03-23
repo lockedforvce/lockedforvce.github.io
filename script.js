@@ -39,6 +39,10 @@ function updateValues() {
   currentMean = data.mean;
   currentStd = data.sd;
 }
+function roundTo(num, decimals) {
+  const factor = Math.pow(10, decimals);
+  return Math.round(num * factor) / factor;
+}
 // Button function
 function calculate() {
   const x = parseFloat(document.getElementById("x").value);
@@ -62,6 +66,6 @@ function calculate() {
   document.getElementById("result").innerText =
     "Percentile = " + (result * 100).toFixed(2) + "th";
    document.getElementById("ss").innerText =
-    "Study Score = " + StudyScore.toFixed(2);
+    "Study Score = " + roundTo(StudyScore,2);
 }
 
