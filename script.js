@@ -11,10 +11,10 @@ function erf(x) {
   const p = 0.3275911;
 
   const t = 1 / (1 + p * x);
-  const y = 1 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1)
+  const q = 1 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1)
               * t * Math.exp(-x * x);
 
-  return sign * y;
+  return sign * q;
 }
 
 // Normal CDF
@@ -24,10 +24,8 @@ function normalCDF(x, mean, std) {
 let currentMean = null;
 let currentStd = null;
 const subjects = {
-  stoopid: { mean: null, sd: null, MaxMarks: null},
-  english: { mean: 32.6, sd: 8, MaxMarks: 60 },
-  chemistry: { mean: 125.3, sd: 47.2, MaxMarks: 240 },
-  biology: { mean: 146.2, sd: 44, MaxMarks: 240 }
+  stoopid: { meanX: null, Mean4: null, Mean3: null, sdX: null, sd4: null, sd3: null, MaxMarksX: null, MaxMarks4: null, MaxMarks3: null},
+  english: { meanX: 32.6, Mean4: 66.2, Mean3: 65.7, sdX: 8, sd4: 14.9, sd3: 14.8, MaxMarksX: 60, MaxMarks4: 100, MaxMarks3: 100},
 };
 function updateValues() {
   const selected = document.getElementById("subject").value;
@@ -36,8 +34,12 @@ function updateValues() {
 
   const data = subjects[selected];
 
-  currentMean = data.mean;
-  currentStd = data.sd;
+  currentMean3 = data.Mean3;
+  currentStd3 = data.sd3;
+  currentMean4 = data.Mean4;
+  currentStd4 = data.sd4;
+  currentMeanX = data.MeanX;
+  currentStdX = data.sdX;
 }
 function roundTo(num, decimals) {
   const factor = Math.pow(10, decimals);
@@ -49,23 +51,31 @@ function calculate() {
   const selected = document.getElementById("subject").value;
   const data = subjects[selected];
   
-  if (currentMean === null || currentStd === null) {
+  if (currentMean3 === null || currentStd3 === null || currentMean4 === null || currentStd4 === null || currentMeanX === null || currentStdX === null) {
     document.getElementById("result").innerText =
       "are we deadass";
     return;
   }
 
-  let result = normalCDF(x, currentMean, currentStd);
- result = Math.max(0, Math.min(1, result));
+  let p3 = normalCDF(z, currentMean3, currentStd3);
+  let p4 = normalCDF(y, currentMean4, currentStd4);
+  let pX = normalCDF(x, currentMeanX, currentStdX);
+ 
+  p3 = Math.max(0, Math.min(1, p3));
+  p4 = Math.max(0, Math.min(1, p4));
+  pX = Math.max(0, Math.min(1, pX));
 
-  if ((2 * x) >= data.MaxMarks) {
-  result = .9999;
+  if ((z) >= data.MaxMarks3) {
+  p3 = .9999;
+  if ((y) >= data.MaxMarks4) {
+  p4 = .9999;
+  if ((2 * x) >= data.MaxMarksX) {
+  pX = .9999;
 
 }
-  let StudyScore = result * 50
-  document.getElementById("result").innerText =
-    "Percentile = " + (result * 100).toFixed(2) + "th";
-   document.getElementById("ss").innerText =
+  let StudyScore = (p3 * .25) + (p4 * .25) + (pX * .5)
+   
+    document.getElementById("ss").innerText =
     "Study Score = " + roundTo(StudyScore,2);
 }
 
