@@ -57,8 +57,8 @@ function roundTo(num, decimals) {
 //y=> the SAC average for unit 4
 //x=> predicted exam mark
 function calculate() {
-  const z = parseFloat(document.getElementById("u3").value);
-  const y = parseFloat(document.getElementById("u4").value);
+  const z = parseFloat(document.getElementById("z").value);
+  const y = parseFloat(document.getElementById("y").value);
   const x = parseFloat(document.getElementById("x").value);
   const selected = document.getElementById("subject").value;
   const data = subjects[selected];
@@ -95,7 +95,7 @@ let ssX = pX * 50;
 
 let StudyScore = (ss3 * 0.25) + (ss4 * 0.25) + (ssX * 0.5);
    
-    document.getElementById("ss").innerText =
-    "Study Score = " + roundTo(StudyScore,2);
+    document.getElementById("result").innerText =
+    "Study Score = " + roundTo(StudyScore, 2);
 }
 
