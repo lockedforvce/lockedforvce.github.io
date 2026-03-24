@@ -151,7 +151,7 @@ function calculate() {
 
   // percentile is between 0.00 and 99.99  
   percentile = Math.max(0, Math.min(1, percentile));
-  percentile = Math.min(percentile, 0.9999);
+  percentile = Math.min(percentile, 0.99786);
 
   //Study score calculation
   //zScore is the standardised score based on your percentile
