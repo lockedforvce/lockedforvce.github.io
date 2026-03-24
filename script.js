@@ -88,14 +88,37 @@ function calculate() {
   if ((2 * x) >= data.MaxMarksX) {
   pX = .9999;
   }
-//Study scores are calculated by multiplying percentiles by 50 
-let ss3 = p3 * 50;
-let ss4 = p4 * 50;
-let ssX = pX * 50;
 
-let StudyScore = (ss3 * 0.25) + (ss4 * 0.25) + (ssX * 0.5);
-   
-    document.getElementById("result").innerText =
+  let examScaled = 2 * x; // exam is marked twice but people wont consider this when they put in their exam score
+  let combined =
+    (z * 0.25) +
+    (y * 0.25) +
+    (examScaled * 0.5);
+
+  //Estimate combined mean and SD
+  let combinedMean =
+    (data.Mean3 * 0.25) +
+    (data.Mean4 * 0.25) +
+    ((data.MeanX * 2) * 0.5);
+
+  let combinedSD = Math.sqrt(
+    Math.pow(data.sd3 * 0.25, 2) +
+    Math.pow(data.sd4 * 0.25, 2) +
+    Math.pow((data.sdX * 2) * 0.5, 2)
+  );
+
+  //Percentile
+  let percentile = normalCDF(combined, combinedMean, combinedSD);
+
+  // percentile is between 0.00 and 99.99  
+  percentile = Math.max(0, Math.min(1, percentile));
+  percentile = Math.min(percentile, 0.9999);
+
+  //Study score calculation
+  let StudyScore = percentile * 50;
+
+  // Output
+  document.getElementById("result").innerText =
     "Study Score = " + roundTo(StudyScore, 2);
 }
 
