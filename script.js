@@ -17,6 +17,45 @@ function erf(x) {
   return sign * q;
 }
 
+//Aproximation of inverse erf() : DO NOT TOUCH - COPIED STRAIGHT FROM CHATGPT - MESSING THIS UP BREAKS ENTIRE CODE
+function inverseNormalCDF(p) {
+  if (p <= 0 || p >= 1) return NaN;
+
+  const a1 = -39.6968302866538, a2 = 220.946098424521;
+  const a3 = -275.928510446969, a4 = 138.357751867269;
+  const a5 = -30.6647980661472, a6 = 2.50662827745924;
+
+  const b1 = -54.4760987982241, b2 = 161.585836858041;
+  const b3 = -155.698979859887, b4 = 66.8013118877197;
+  const b5 = -13.2806815528857;
+
+  const c1 = -0.00778489400243029, c2 = -0.322396458041136;
+  const c3 = -2.40075827716184, c4 = -2.54973253934373;
+  const c5 = 4.37466414146497, c6 = 2.93816398269878;
+
+  const d1 = 0.00778469570904146, d2 = 0.32246712907004;
+  const d3 = 2.445134137143, d4 = 3.75440866190742;
+
+  let q, r;
+
+  if (p < 0.02425) {
+    q = Math.sqrt(-2 * Math.log(p));
+    return (((((c1*q+c2)*q+c3)*q+c4)*q+c5)*q+c6) /
+           ((((d1*q+d2)*q+d3)*q+d4)*q+1);
+  }
+
+  if (p > 1 - 0.02425) {
+    q = Math.sqrt(-2 * Math.log(1 - p));
+    return -(((((c1*q+c2)*q+c3)*q+c4)*q+c5)*q+c6) /
+            ((((d1*q+d2)*q+d3)*q+d4)*q+1);
+  }
+
+  q = p - 0.5;
+  r = q * q;
+  return (((((a1*r+a2)*r+a3)*r+a4)*r+a5)*r+a6)*q /
+         (((((b1*r+b2)*r+b3)*r+b4)*r+b5)*r+1);
+}
+
 // Normal CDF Function: This is the function which shows how you place (percentile) compared to everyone else using mean and std.
 function normalCDF(x, mean, std) {
   return 0.5 * (1 + erf((x - mean) / (std * Math.sqrt(2))));
@@ -115,7 +154,9 @@ function calculate() {
   percentile = Math.min(percentile, 0.9999);
 
   //Study score calculation
-  let StudyScore = percentile * 50;
+  //zScore is the standardised score based on your percentile
+let zScore = inverseNormalCDF(percentile);
+let StudyScore = 30 + 7 * zScore;
 
   // Output
   document.getElementById("result").innerText =
