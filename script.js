@@ -69,6 +69,7 @@ let currentStdX = null;
 const subjects = {
   stoopid: { MeanX: null, Mean4: null, Mean3: null, sdX: null, sd4: null, sd3: null, MaxMarksX: null, MaxMarks4: null, MaxMarks3: null},
   english: { MeanX: 32.6, Mean4: 66.2, Mean3: 65.7, sdX: 8, sd4: 14.9, sd3: 14.8, MaxMarksX: 60, MaxMarks4: 100, MaxMarks3: 100},
+  biology: { MeanX: 146.2, Mean4: 427/6, Mean3: 21/32, sdX: 44, sd4: 18.9, sd3: 15.2, MaxMarksX: 240, MaxMarks4: 100, MaxMarks3: 100},  
 };
 
 //This updates the values for each subject as they are changed from the dropdown so that the calculator uses the values for that specific subject.
