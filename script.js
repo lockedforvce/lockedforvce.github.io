@@ -138,12 +138,12 @@ function calculate() {
   let combinedMean =
     (data.Mean3 * 0.25) +
     (data.Mean4 * 0.25) +
-    ((data.MeanX * 2) * 0.5);
+    (data.MeanX * 0.5);
 
   let combinedSD = Math.sqrt(
     Math.pow(data.sd3 * 0.25, 2) +
     Math.pow(data.sd4 * 0.25, 2) +
-    Math.pow((data.sdX * 2) * 0.5, 2)
+    Math.pow(data.sdX * 0.5, 2)
   );
 
   //Percentile
